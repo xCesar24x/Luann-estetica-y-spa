@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from(".service-card", {
         scrollTrigger: {
             trigger: ".services",
-            start: "top 80%",
+            start: "top 95%", // Aparece casi de inmediato al entrar en vista
         },
         opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
+        y: 30,
+        duration: 0.6,
+        stagger: 0.1,
         ease: "power2.out"
     });
 
