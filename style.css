@@ -7,7 +7,7 @@
     --bg-light: #FAF9F6; /* Off-white */
     --bg-mint: #E8F0E6;
     --text-dark: #2C3639;
-    --text-muted: #626D71;
+    --text-muted: #4A5558; /* Más oscuro para legibilidad */
     --white: #FFFFFF;
     
     /* System */
@@ -297,21 +297,21 @@ h1, h2, h3, .loader-logo {
     border-radius: var(--radius);
     text-align: center;
     transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.03);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04); /* Sombra base más definida */
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(139, 168, 144, 0.12);
-    border-color: var(--primary-light);
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(139, 168, 144, 0.18); /* Sombra de elevación premium */
+    border-color: var(--primary);
 }
 
 .card-icon {
     width: 70px;
     height: 70px;
     background: var(--bg-mint);
-    color: var(--primary);
+    color: var(--primary-dark); /* Color más fuerte para el icono */
     border-radius: 50%;
     display: flex;
     justify-content: center;
