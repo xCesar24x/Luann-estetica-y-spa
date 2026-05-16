@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luann Estética y Spa | Belleza y Bienestar</title>
+    <meta name="description" content="Descubre Luann Estética y Spa en San Joaquín de Flores. Faciales, masajes, depilación y moldeo corporal con la mejor atención de Andrea.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <h1 class="loader-logo">Luann</h1>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-logo">
+                <img src="Imagenes/logo.png" alt="Luann Logo" id="main-logo">
+            </div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#precios">Precios</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <button class="btn-primary" onclick="window.location.href='https://wa.me/506'">Agendar Cita</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <span class="badge">Bienvenida a tu momento</span>
+                    <h1>Realza tu belleza <br><span class="accent">natural</span></h1>
+                    <p>En Luann Estética y Spa, Andrea te ofrece una experiencia única de relajación y cuidado personal en San Joaquín de Flores.</p>
+                    <div class="hero-btns">
+                        <a href="#servicios" class="btn-secondary">Ver Servicios</a>
+                        <a href="#contacto" class="btn-outline">Ubicación</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <img src="Imagenes/1.jpeg" alt="Andrea - Luann Estética">
+                    </div>
+                    <div class="floating-card">
+                        <i data-lucide="sparkles"></i>
+                        <span>Resultados Reales</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Desliza para explorar</span>
+                <div class="mouse"></div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section id="servicios" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nuestros Servicios</h2>
+                    <p>Cuidado integral diseñado para tu cuerpo y mente.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card" data-service="faciales">
+                        <div class="card-icon"><i data-lucide="user"></i></div>
+                        <h3>Faciales</h3>
+                        <p>Desde limpieza básica hasta tratamientos anti-edad avanzados.</p>
+                        <span class="price-from">Desde ₡12.000</span>
+                    </div>
+                    <div class="service-card" data-service="masajes">
+                        <div class="card-icon"><i data-lucide="flower-2"></i></div>
+                        <h3>Masajes</h3>
+                        <p>Relajantes, piedras calientes y terapias para lesiones.</p>
+                        <span class="price-from">Desde ₡10.000</span>
+                    </div>
+                    <div class="service-card" data-service="corporal">
+                        <div class="card-icon"><i data-lucide="gem"></i></div>
+                        <h3>Moldeo Corporal</h3>
+                        <p>Tratamientos reductivos con maderoterapia y vendas frías.</p>
+                        <span class="price-from">Desde ₡130.000</span>
+                    </div>
+                    <div class="service-card" data-service="pedicure">
+                        <div class="card-icon"><i data-lucide="waves"></i></div>
+                        <h3>Pedicure Spa</h3>
+                        <p>Cuidado profundo para tus pies con sales y parafina.</p>
+                        <span class="price-from">Desde ₡7.000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Pricing Table -->
+        <section id="precios" class="pricing">
+            <div class="container">
+                <div class="glass-container">
+                    <div class="pricing-header">
+                        <h2>Menú de Bienestar</h2>
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="faciales">Faciales & Cejas</button>
+                            <button class="tab-btn" data-tab="corporal">Corporal & Masajes</button>
+                            <button class="tab-btn" data-tab="depilacion">Depilación & Pies</button>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-content">
+                        <!-- Tab Faciales -->
+                        <div class="tab-panel active" id="tab-faciales">
+                            <div class="pricing-grid">
+                                <div class="price-item"><span>Limpieza Facial Básica</span> <span class="dots"></span> <strong>₡12.000</strong></div>
+                                <div class="price-item"><span>Limpieza Profunda</span> <span class="dots"></span> <strong>₡16.000</strong></div>
+                                <div class="price-item"><span>Hidratación Profunda</span> <span class="dots"></span> <strong>₡18.000</strong></div>
+                                <div class="price-item"><span>Facial Micro Agujas</span> <span class="dots"></span> <strong>₡25.000</strong></div>
+                                <div class="price-divider">Cejas y Pestañas</div>
+                                <div class="price-item"><span>Diseño y Henna</span> <span class="dots"></span> <strong>₡8.500</strong></div>
+                                <div class="price-item"><span>Lifting de Pestañas</span> <span class="dots"></span> <strong>₡13.500</strong></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab Corporal -->
+                        <div class="tab-panel" id="tab-corporal">
+                            <div class="pricing-grid">
+                                <div class="price-item"><span>Masaje Relajante Completo</span> <span class="dots"></span> <strong>₡17.000</strong></div>
+                                <div class="price-item"><span>Piedras Calientes</span> <span class="dots"></span> <strong>₡21.000</strong></div>
+                                <div class="price-item"><span>Masaje Espalda (30 min)</span> <span class="dots"></span> <strong>₡10.000</strong></div>
+                                <div class="price-divider">Paquetes Corporales</div>
+                                <div class="price-item"><span>Moldeo (8 sesiones)</span> <span class="dots"></span> <strong>₡130.000</strong></div>
+                                <p class="price-note">* Incluye maderoterapia, vendas frías y ultrasonido.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tab Depilación -->
+                        <div class="tab-panel" id="tab-depilacion">
+                            <div class="pricing-grid">
+                                <div class="price-item"><span>Axila</span> <span class="dots"></span> <strong>₡8.000</strong></div>
+                                <div class="price-item"><span>Pierna Completa</span> <span class="dots"></span> <strong>₡12.000</strong></div>
+                                <div class="price-item"><span>Bikini</span> <span class="dots"></span> <strong>₡8.500</strong></div>
+                                <div class="price-divider">Pedicure Spa</div>
+                                <div class="price-item"><span>Pedicura Full Parafina</span> <span class="dots"></span> <strong>₡17.000</strong></div>
+                                <div class="price-item"><span>Solo Esmaltado Semi</span> <span class="dots"></span> <strong>₡7.000</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & Contact -->
+        <section id="contacto" class="contact">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <h2>Visítanos</h2>
+                    <p>Estamos ubicados en el corazón de San Joaquín de Flores.</p>
+                    <div class="info-items">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <h4>Ubicación</h4>
+                                <p>San Joaquín de Flores, Heredia. Frente a torre de telecomunicaciones.</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="clock"></i>
+                            <div>
+                                <h4>Horario</h4>
+                                <p>Lun, Mié, Vie: 9am - 5pm <br> Mar, Jue: 9am - 8pm</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="phone"></i>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>+506 0000-0000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                        <a href="#"><i data-lucide="facebook"></i></a>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <img src="Imagenes/horario.jpeg" alt="Mapa de Ubicación" class="map-preview">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Luann Estética y Spa. Todos los derechos reservados.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
