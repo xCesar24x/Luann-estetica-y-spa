@@ -255,13 +255,20 @@ h1, h2, h3, .loader-logo {
     bottom: 40px;
     left: -40px;
     background: var(--white);
-    padding: 1.5rem;
+    padding: 0.8rem 1.6rem;
     border-radius: var(--radius);
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
     box-shadow: var(--shadow);
     animation: float 4s ease-in-out infinite;
+    z-index: 3;
+}
+
+.floating-logo {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
 }
 
 @keyframes float {
