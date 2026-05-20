@@ -179,12 +179,41 @@ h1, h2, h3, .loader-logo {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, var(--bg-mint) 0%, var(--bg-light) 50%);
     position: relative;
     padding-top: 80px;
+}
+
+/* Logo Grande de Entrada */
+.hero-logo-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem 0;
+    width: 100%;
+    animation: fadeInDown 1s ease both;
+}
+
+.hero-logo-xl {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(95, 116, 100, 0.18));
+    transition: transform 0.4s ease;
+}
+
+.hero-logo-xl:hover {
+    transform: scale(1.04);
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero-grid {
@@ -372,6 +401,7 @@ h1, h2, h3, .loader-logo {
     .hero p { margin: 0 auto 2.5rem; }
     .nav-links { display: none; }
     .hero-image { order: -1; max-width: 400px; margin: 0 auto; }
+    .hero-logo-xl { height: 140px; }
 }
 
 /* Pricing Grid & Tabs */
