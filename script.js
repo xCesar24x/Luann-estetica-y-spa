@@ -1,44 +1,69 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Lucide Icons
-    lucide.createIcons();
+    // Failsafe: Si GSAP no carga o se bloquea, removemos el preloader en 4 segundos máximo
+    const preloaderTimeout = setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader && preloader.style.display !== 'none') {
+            preloader.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }, 4000);
 
-    // GSAP Preloader Animation
-    const tl = gsap.timeline();
+    // Initialize Lucide Icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    // GSAP Fallback
+    if (typeof gsap === 'undefined') {
+        const preloader = document.getElementById('preloader');
+        if (preloader) preloader.style.display = 'none';
+        clearTimeout(preloaderTimeout);
+        return;
+    }
+
+    // GSAP Preloader Animation - Snappy y Fluido (Premium)
+    const tl = gsap.timeline({
+        onComplete: () => {
+            clearTimeout(preloaderTimeout);
+            const preloader = document.getElementById('preloader');
+            if (preloader) preloader.style.display = 'none';
+        }
+    });
     
     tl.to(".loader-logo", {
         opacity: 1,
         y: 0,
-        duration: 1,
+        duration: 0.6,
         ease: "power3.out"
     })
     .to(".loader-bar", {
         width: "100%",
-        duration: 1.5,
+        duration: 0.8,
         ease: "power2.inOut"
-    }, "-=0.5")
+    }, "-=0.2")
     .to("#preloader", {
         y: "-100%",
-        duration: 0.8,
+        duration: 0.6,
         ease: "power4.inOut"
     })
     .from(".navbar", {
         y: -100,
         opacity: 0,
-        duration: 0.8
-    }, "-=0.3")
+        duration: 0.6
+    }, "-=0.2")
     .from(".hero-text > *", {
         opacity: 0,
         y: 30,
-        duration: 0.8,
-        stagger: 0.2,
+        duration: 0.6,
+        stagger: 0.15,
         ease: "power3.out"
-    }, "-=0.5")
+    }, "-=0.3")
     .from(".hero-image", {
         opacity: 0,
-        scale: 0.9,
-        duration: 1.2,
+        scale: 0.95,
+        duration: 0.9,
         ease: "expo.out"
-    }, "-=1");
+    }, "-=0.6");
 
     // Navbar Scroll Effect
     window.addEventListener('scroll', () => {
@@ -49,6 +74,43 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('scrolled');
         }
     });
+
+    // Mobile Menu Toggle Logic
+    const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const navbarElement = document.querySelector('.navbar');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta');
+
+    if (mobileNavToggle && mobileMenu) {
+        const toggleMenu = () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            mobileNavToggle.classList.toggle('open');
+            navbarElement.classList.toggle('menu-open');
+            
+            if (isOpen) {
+                document.body.style.overflow = 'hidden';
+                // GSAP premium slide-in stagger animation
+                gsap.fromTo(".mobile-menu-links a, .mobile-menu-cta, .mobile-menu-socials a", 
+                    { opacity: 0, y: 30 },
+                    { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "power3.out", delay: 0.1 }
+                );
+            } else {
+                document.body.style.overflow = '';
+            }
+        };
+
+        mobileNavToggle.addEventListener('click', toggleMenu);
+
+        // Close menu on link click
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileNavToggle.classList.remove('open');
+                navbarElement.classList.remove('menu-open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
 
     // Scroll Animations with GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
@@ -95,12 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
             tabPanels.forEach(panel => {
                 if (panel.id === `tab-${tabId}`) {
                     panel.classList.add('active');
-                    gsap.from(panel.querySelectorAll('.price-item'), {
-                        opacity: 0,
-                        x: 20,
-                        duration: 0.4,
-                        stagger: 0.05
-                    });
+                    gsap.fromTo(panel.querySelectorAll('.price-item'), 
+                        { opacity: 0, x: 20 },
+                        { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, overwrite: "auto" }
+                    );
                 } else {
                     panel.classList.remove('active');
                 }
@@ -125,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
        Lógica de Galería Interactiva (Experiencia Luann)
        ========================================================================== */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryItems = document.querySelectorAll('.gallery-grid .gallery-item');
     
     if (filterBtns.length > 0 && galleryItems.length > 0) {
         filterBtns.forEach(btn => {
@@ -214,15 +274,17 @@ document.addEventListener('DOMContentLoaded', () => {
             moveSlider(e.clientX);
         });
 
-        // Eventos Táctiles (Mobile)
+        // Eventos Táctiles (Mobile) - Fricción Cero e Interacción Premium
         handle.addEventListener('touchstart', (e) => {
             isDragging = true;
-        });
+            e.preventDefault(); // Prevenir desplazamiento de página
+        }, { passive: false });
         window.addEventListener('touchend', () => { isDragging = false; });
         window.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             moveSlider(e.touches[0].clientX);
-        });
+            e.preventDefault(); // Prevenir desplazamiento de página
+        }, { passive: false });
 
         // Hacer clic en cualquier parte del contenedor mueve el slider
         comparisonSlider.addEventListener('click', (e) => {
@@ -244,12 +306,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let currentGalleryIndex = 0;
         let activeGalleryItems = [];
+        let isStandalone = false;
 
         const updateActiveGalleryItems = () => {
             activeGalleryItems = Array.from(document.querySelectorAll('.gallery-item:not(.hide)'));
         };
 
         const showLightboxItem = (index) => {
+            if (isStandalone) return;
+            
             if (index < 0) index = activeGalleryItems.length - 1;
             if (index >= activeGalleryItems.length) index = 0;
             
@@ -285,8 +350,31 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const openLightbox = (index) => {
+            isStandalone = false;
+            lightboxPrev.style.display = 'flex';
+            lightboxNext.style.display = 'flex';
             updateActiveGalleryItems();
             showLightboxItem(index);
+            lightbox.classList.add('active');
+            gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+            document.body.style.overflow = 'hidden'; // Detener scroll de fondo
+        };
+
+        const openStandaloneLightbox = (src, title) => {
+            isStandalone = true;
+            lightboxPrev.style.display = 'none';
+            lightboxNext.style.display = 'none';
+            
+            lightboxContent.innerHTML = '';
+            lightboxCaption.textContent = title;
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = title;
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '80vh';
+            lightboxContent.appendChild(img);
+
             lightbox.classList.add('active');
             gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.3 });
             document.body.style.overflow = 'hidden'; // Detener scroll de fondo
@@ -314,6 +402,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Registrar evento clic en la tarjeta del horario (schedule-card)
+        const scheduleCard = document.querySelector('.schedule-card');
+        if (scheduleCard) {
+            scheduleCard.addEventListener('click', () => {
+                const src = scheduleCard.getAttribute('data-src');
+                const title = scheduleCard.getAttribute('data-title') || 'Horario de Atención';
+                openStandaloneLightbox(src, title);
+            });
+        }
+
         // Controles de Lightbox
         lightboxClose.addEventListener('click', closeLightbox);
         lightboxPrev.addEventListener('click', (e) => {
@@ -336,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
+            if (isStandalone) return;
             if (e.key === 'ArrowLeft') showLightboxItem(currentGalleryIndex - 1);
             if (e.key === 'ArrowRight') showLightboxItem(currentGalleryIndex + 1);
         });
@@ -346,13 +445,15 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================== */
     const whatsappFloat = document.querySelector('.whatsapp-float');
     if (whatsappFloat) {
-        window.addEventListener('scroll', () => {
+        const checkScroll = () => {
             if (window.scrollY > 300) {
                 whatsappFloat.classList.add('visible');
             } else {
                 whatsappFloat.classList.remove('visible');
             }
-        });
+        };
+        window.addEventListener('scroll', checkScroll);
+        checkScroll(); // Comprobar posición inicial al cargar
     }
 
     // Registrar nuevos ScrollTriggers de GSAP

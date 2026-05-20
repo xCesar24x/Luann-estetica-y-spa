@@ -239,14 +239,14 @@ h1, h2, h3, .loader-logo {
     box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
 }
 
-.image-wrapper img {
+.image-wrapper img, .image-wrapper video, .image-wrapper .hero-video-card {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.8s ease;
 }
 
-.hero-image:hover img {
+.hero-image:hover img, .hero-image:hover video, .hero-image:hover .hero-video-card {
     transform: scale(1.05);
 }
 
@@ -829,7 +829,6 @@ h1, h2, h3, .loader-logo {
     background: var(--primary);
     color: var(--white);
     border-color: var(--primary);
-    transform: scale(1.05);
 }
 .lightbox-close {
     top: 30px;
@@ -837,15 +836,28 @@ h1, h2, h3, .loader-logo {
     width: 50px;
     height: 50px;
 }
+.lightbox-close:hover {
+    transform: scale(1.05);
+}
 .lightbox-prev {
     left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
     height: 50px;
 }
+.lightbox-prev:hover {
+    transform: translateY(-50%) scale(1.05);
+}
 .lightbox-next {
     right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
     height: 50px;
+}
+.lightbox-next:hover {
+    transform: translateY(-50%) scale(1.05);
 }
 .lightbox-content {
     max-width: 85%;
@@ -954,18 +966,266 @@ h1, h2, h3, .loader-logo {
     }
     .lightbox-prev {
         left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
         width: 44px;
         height: 44px;
     }
+    .lightbox-prev:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
     .lightbox-next {
         right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
         width: 44px;
         height: 44px;
+    }
+    .lightbox-next:hover {
+        transform: translateY(-50%) scale(1.05);
     }
     .lightbox-close {
         top: 20px;
         right: 20px;
         width: 44px;
         height: 44px;
+    }
+}
+
+/* ==========================================================================
+   Efecto de Desplazamiento (Scroll Indicator)
+   ========================================================================== */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 5;
+    animation: fadePulse 2s infinite ease-in-out;
+}
+.scroll-indicator span {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    position: relative;
+}
+.mouse::before {
+    content: '';
+    width: 4px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollWheel 1.6s infinite ease-in-out;
+}
+
+@keyframes fadePulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+@keyframes scrollWheel {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+/* ==========================================================================
+   Menú Móvil Hamburguesa e Interactividad
+   ========================================================================== */
+.mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1015;
+}
+.mobile-nav-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-dark);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.mobile-nav-toggle.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--primary-dark);
+}
+.mobile-nav-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+.mobile-nav-toggle.open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+    background-color: var(--primary-dark);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(250, 249, 246, 0.96); /* --bg-light */
+    backdrop-filter: blur(20px);
+    z-index: 1005;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+.mobile-menu.open {
+    right: 0;
+}
+.mobile-menu-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+    padding: 2rem;
+}
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.mobile-menu-links a {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: var(--transition);
+}
+.mobile-menu-links a:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+}
+.mobile-menu-socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.mobile-menu-socials a {
+    width: 50px;
+    height: 50px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+.mobile-menu-socials a:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+.navbar.menu-open {
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+/* ==========================================================================
+   Tarjeta del Horario de Atención
+   ========================================================================== */
+.schedule-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    margin: 2rem 0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    aspect-ratio: 16/9;
+    max-width: 320px;
+}
+.schedule-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+}
+.schedule-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 168, 144, 0.85); /* Verde salvia opaco */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--white);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 2;
+}
+.schedule-overlay i {
+    width: 24px;
+    height: 24px;
+}
+.schedule-overlay span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.schedule-card:hover .schedule-overlay {
+    opacity: 1;
+}
+.schedule-card:hover .schedule-thumb {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   Mejoras de Robustez & Responsive
+   ========================================================================== */
+.price-item strong {
+    flex-shrink: 0;
+}
+
+@media (max-width: 992px) {
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    .navbar .btn-primary {
+        display: none;
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+}
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 2.2rem;
+    }
+    .hero h1 {
+        font-size: 2.4rem;
     }
 }

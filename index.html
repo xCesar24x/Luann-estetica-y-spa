@@ -42,9 +42,35 @@
                 <a href="#precios">Precios</a>
                 <a href="#contacto">Contacto</a>
             </div>
-            <button class="btn-primary" onclick="window.location.href='https://wa.me/50600000000?text=Hola%20Luann%20Spa!%20Me%20gustar%C3%ADa%20agendar%20una%20cita.'">Agendar Cita</button>
+            <button class="btn-primary" onclick="window.location.href='https://wa.me/50689459346?text=Hola%20Luann%20Spa!%20Me%20gustar%C3%ADa%20agendar%20una%20cita.'">Agendar Cita</button>
+            
+            <!-- Botón del menú móvil hamburguesa -->
+            <button class="mobile-nav-toggle" aria-label="Menú de Navegación">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
+ 
+    <!-- Menú Móvil Overlay -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#galeria">Galería</a>
+                <a href="#resultados">Resultados</a>
+                <a href="#precios">Precios</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <button class="btn-primary mobile-menu-cta" onclick="window.location.href='https://wa.me/50689459346?text=Hola%20Luann%20Spa!%20Me%20gustar%C3%ADa%20agendar%20una%20cita.'">Agendar Cita</button>
+            <div class="mobile-menu-socials">
+                <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -350,17 +376,27 @@
                             <i data-lucide="phone"></i>
                             <div>
                                 <h4>WhatsApp</h4>
-                                <p>+506 0000-0000</p>
+                                <p>+506 8945-9346</p>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Tarjeta Visual de Horario Clickable -->
+                    <div class="schedule-card" data-src="Imagenes/horario.jpeg" data-title="Horario de Atención Luann Spa">
+                        <div class="schedule-overlay">
+                            <i data-lucide="maximize-2"></i>
+                            <span>Ver Horario Completo</span>
+                        </div>
+                        <img src="Imagenes/horario.jpeg" alt="Horario de Atención" class="schedule-thumb">
+                    </div>
+
                     <div class="social-links">
-                        <a href="#"><i data-lucide="instagram"></i></a>
-                        <a href="#"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
                     </div>
                 </div>
                 <div class="contact-map">
-                    <img src="Imagenes/horario.jpeg" alt="Mapa de Ubicación" class="map-preview">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15718.064501438908!2d-84.1610419!3d10.0155708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fa49c30c33a9%3A0x6b6d21469e38d6df!2sSan%20Joaqu%C3%ADn%20de%20Flores%2C%20Heredia!5e0!3m2!1ses!2scr!4v1684500000000!5m2!1ses!2scr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de Luann Estética y Spa"></iframe>
                 </div>
             </div>
         </section>
@@ -389,7 +425,7 @@
     </div>
 
     <!-- Floating WhatsApp CTA -->
-    <a href="https://wa.me/50600000000?text=Hola%20Luann%20Spa!%20Me%20gustar%C3%ADa%20agendar%20una%20cita." target="_blank" class="whatsapp-float" aria-label="Agendar por WhatsApp">
+    <a href="https://wa.me/50689459346?text=Hola%20Luann%20Spa!%20Me%20gustar%C3%ADa%20agendar%20una%20cita." target="_blank" class="whatsapp-float" aria-label="Agendar por WhatsApp">
         <span class="float-text">Agendar Cita</span>
         <div class="float-icon-wrapper">
             <i data-lucide="message-circle" class="wa-icon"></i>
