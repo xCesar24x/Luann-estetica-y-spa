@@ -119,13 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from(".service-card", {
         scrollTrigger: {
             trigger: ".services",
-            start: "top 95%",
+            start: "top 90%",
+            once: true
         },
-        opacity: 0.4, // Empezamos desde 0.4 para que no desaparezcan del todo
-        y: 20,
+        y: 25,
         duration: 0.5,
         stagger: 0.1,
-        ease: "power2.out"
+        ease: "power2.out",
+        immediateRender: false
     });
 
     // Contact Info Reveal
@@ -458,17 +459,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Registrar nuevos ScrollTriggers de GSAP
     if (typeof ScrollTrigger !== 'undefined') {
-        // Revelar Galería
+        // Revelar Galería — immediateRender:false previene el flash de opacity:0 antes de que el trigger dispare
         gsap.from(".gallery-item", {
             scrollTrigger: {
                 trigger: ".gallery-section",
-                start: "top 85%",
+                start: "top 90%",
+                once: true
             },
-            opacity: 0,
             y: 35,
             duration: 0.6,
-            stagger: 0.08,
-            ease: "power2.out"
+            stagger: 0.06,
+            ease: "power2.out",
+            immediateRender: false
         });
 
         // Revelar Comparador Antes/Después
@@ -476,11 +478,13 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: ".comparison-section",
                 start: "top 80%",
+                once: true
             },
             opacity: 0,
             scale: 0.97,
             duration: 0.8,
-            ease: "power2.out"
+            ease: "power2.out",
+            immediateRender: false
         });
     }
 });

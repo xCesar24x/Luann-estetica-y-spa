@@ -619,6 +619,7 @@ h1, h2, h3, .loader-logo {
     transition: var(--transition);
     position: relative;
     border: 1px solid rgba(0,0,0,0.03);
+    opacity: 1; /* Failsafe: siempre visible por CSS, GSAP solo anima el slide-up */
 }
 .gallery-item:hover {
     transform: translateY(-8px);
